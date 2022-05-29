@@ -1,0 +1,24 @@
+<h1><%= @artist.name %></h1>
+
+<% if @artist.albums.any? %>
+  <h4>Here are the albums by this artist:</h4>
+
+  <% @artist.albums.each do |album| %>
+    <ul>
+      <li>
+        <%= link_to album.name, artist_album_path(@artist, album) %>
+      </li>
+    </ul>
+  <% end %>
+<% else %>
+  <p>No albums are listed for this artist</p>
+<% end %>
+
+<%# <p><%= link_to "Add an album", new_artist_album_path(@artist)</p> %> 
+
+<p><%= link_to "Edit", edit_artist_path(@artist) %></p>
+<p><%= link_to "Delete album", artist_path(@artist),
+                        :data => {:confirm => "Are you sure?",
+                                       :method => "delete"} %></p>
+
+<p><%= link_to "Return to albums", albums_path %></p>
